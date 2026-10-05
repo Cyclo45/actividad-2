@@ -1,0 +1,196 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  background: #07031a;
+}
+
+/* Nebulosa que respira */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .9rem;
+  padding: 2rem 1rem;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #e9e4ff;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 20% 25%, rgba(155, 70, 255, .55), transparent 45%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 200, 255, .40), transparent 40%),
+    radial-gradient(ellipse at 70% 85%, rgba(255, 60, 170, .45), transparent 45%),
+    radial-gradient(ellipse at 15% 90%, rgba(60, 80, 255, .40), transparent 40%),
+    #07031a;
+  background-size: 140% 140%;
+  animation: nebulosa 18s ease-in-out infinite alternate;
+  overflow-x: hidden;
+}
+
+@keyframes nebulosa {
+  from { background-position: 0% 0%; }
+  to   { background-position: 100% 100%; }
+}
+
+/* Estrellas: dos capas que parpadean a distinto ritmo */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  background: transparent;
+  z-index: -1;
+}
+
+body::before {
+  box-shadow:
+    5vw 8vh #fff, 12vw 40vh #cfe8ff, 18vw 70vh #fff, 24vw 15vh #ffd6f5,
+    31vw 55vh #fff, 38vw 88vh #cfe8ff, 44vw 25vh #fff, 52vw 62vh #ffd6f5,
+    58vw 10vh #fff, 66vw 48vh #cfe8ff, 73vw 78vh #fff, 81vw 33vh #ffd6f5,
+    88vw 66vh #fff, 94vw 12vh #cfe8ff, 97vw 90vh #fff, 9vw 95vh #ffd6f5;
+  animation: titilar 3.5s ease-in-out infinite;
+}
+
+body::after {
+  width: 3px; height: 3px;
+  box-shadow:
+    8vw 22vh #fff, 15vw 58vh #ffe9a8, 22vw 84vh #fff, 29vw 6vh #cfe8ff,
+    35vw 36vh #fff, 47vw 74vh #ffe9a8, 55vw 44vh #fff, 62vw 92vh #cfe8ff,
+    69vw 18vh #fff, 76vw 60vh #ffe9a8, 84vw 82vh #fff, 91vw 42vh #cfe8ff;
+  animation: titilar 5s ease-in-out 1.2s infinite;
+}
+
+@keyframes titilar {
+  0%, 100% { opacity: .25; transform: scale(.8); }
+  50%      { opacity: 1;   transform: scale(1.3); }
+}
+
+/* Estrella fugaz */
+html::after {
+  content: "";
+  position: fixed;
+  top: 8vh; left: 100vw;
+  width: 140px; height: 2px;
+  background: linear-gradient(90deg, #fff, transparent);
+  border-radius: 2px;
+  transform: rotate(-20deg);
+  opacity: 0;
+  pointer-events: none;
+  animation: fugaz 7s ease-in 2s infinite;
+}
+
+@keyframes fugaz {
+  0%   { opacity: 0; transform: translate(0, 0) rotate(-20deg); }
+  3%   { opacity: 1; }
+  14%  { opacity: 0; transform: translate(-120vw, 45vh) rotate(-20deg); }
+  100% { opacity: 0; transform: translate(-120vw, 45vh) rotate(-20deg); }
+}
+
+/* Título principal */
+h1:first-of-type {
+  font-size: clamp(2.4rem, 9vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: .04em;
+  background: linear-gradient(90deg, #8be9ff, #c58bff, #ff8bd5, #8be9ff);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 18px rgba(197, 139, 255, .65));
+  animation: aurora 6s linear infinite, aparecer 1.2s ease-out both;
+  margin-bottom: 1rem;
+}
+
+@keyframes aurora  { to { background-position: 300% center; } }
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-30px) scale(.9); letter-spacing: .3em; }
+  to   { opacity: 1; transform: none; letter-spacing: .04em; }
+}
+
+/* Títulos de cada campo */
+h1:not(:first-of-type) {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #bfe9ff;
+  text-shadow: 0 0 10px rgba(0, 200, 255, .7);
+}
+
+/* Campos de texto */
+input {
+  width: min(88vw, 320px);
+  padding: .8rem 1.2rem;
+  font: inherit;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #fff;
+  background: rgba(20, 10, 60, .55);
+  border: 2px solid rgba(160, 130, 255, .5);
+  border-radius: 999px;
+  outline: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 0 14px rgba(120, 80, 255, .3), inset 0 0 12px rgba(120, 80, 255, .15);
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+}
+
+input:focus {
+  border-color: #6ee7ff;
+  box-shadow: 0 0 26px rgba(0, 220, 255, .7), inset 0 0 14px rgba(0, 220, 255, .25);
+  transform: scale(1.05);
+}
+
+/* Botón */
+button {
+  position: relative;
+  margin-top: 1rem;
+  padding: .9rem 2.4rem;
+  font: inherit;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(120deg, #7b2ff7, #f107a3, #00c6ff, #7b2ff7);
+  background-size: 300% 300%;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 0 22px rgba(241, 7, 163, .55);
+  animation: aurora-fondo 5s linear infinite, pulso 2.4s ease-in-out infinite;
+  transition: transform .2s;
+}
+
+button:hover  { transform: translateY(-4px) scale(1.08); }
+button:active { transform: scale(.94); }
+button:focus-visible { outline: 3px solid #8be9ff; outline-offset: 5px; }
+
+@keyframes aurora-fondo {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+@keyframes pulso {
+  0%, 100% { box-shadow: 0 0 18px rgba(241, 7, 163, .5); }
+  50%      { box-shadow: 0 0 38px rgba(0, 198, 255, .8); }
+}
+
+/* Resultado */
+#secret-result {
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
+  font-size: clamp(1.3rem, 4.5vw, 1.9rem);
+  color: #fff;
+  background: rgba(20, 10, 60, .45);
+  border: 1px solid rgba(160, 130, 255, .45);
+  border-radius: 20px;
+  text-shadow: 0 0 14px rgba(255, 255, 255, .8);
+  animation: flotar 4s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after, html::after { animation: none !important; transition: none !important; }
+}

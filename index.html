@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>''
+    <title>herby parrilla</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+    <h1>herby parrilla</h1>
+
+
+<h1>Cantidad de personas</h1>
+<input id='input' type='text'>
+<h1>Cantidad de pedazos de torta</h1>
+<input id='input1' type='text'>
+<button onclick="
+let value=document.querySelector('#input').value
+let value1= document.querySelector('#input1').value
+let division=value/value1
+if (division>=1) {
+par = document.querySelector('#secret-result')
+par.innerHTML = '¡Suficiente para todos!'
+}
+else {
+par = document.querySelector('#secret-result')
+par.innerHTML = 'No hay suficiente para todos'
+}
+"> Verificar </button>
+           <h2 id="secret-result"> aqui estoy</h2>
+</body>
+</html>
